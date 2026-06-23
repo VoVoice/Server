@@ -1,0 +1,12 @@
+{
+    "routing-urls": {
+        "endpoint": "https://api.example.url",
+        "health": "https://health.exampe.url"
+    },
+    "apis": {
+        "openrouter": "https://openrouter.ai/....",
+        "update": "https://version-server.vovoice.qzz.io/server.json"
+    },
+    "version": 1,
+    "openrouter_token": ""
+}

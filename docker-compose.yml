@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  vovoice:
+    build: .
+    image: ghcr.io/vovoice/server:latest
+    container_name: vovoice-server
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - vovoice-data:/app/data
+    environment:
+      - OPENROUTER_TOKEN=${OPENROUTER_TOKEN:-}
+      - JWT_SECRET=${JWT_SECRET:-}
+      - SERVER_API_KEY=${SERVER_API_KEY:-}
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8000
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - DOMAIN=${DOMAIN:-}
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
+        reservations:
+          memory: 1G
+          cpus: "0.5"
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  vovoice-data:
+    driver: local

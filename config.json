@@ -1,0 +1,61 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "name": "VoVoice Server",
+    "version": "1.0.0",
+    "cors_origins": ["*"],
+    "rate_limit": "60/minute",
+    "debug": false
+  },
+  "stt": {
+    "model": "base",
+    "device": "cpu",
+    "language": "en",
+    "beam_size": 5,
+    "vad_filter": true
+  },
+  "tts": {
+    "default_voice": "en_US-lessac-medium",
+    "output_format": "wav",
+    "speed": 1.0,
+    "voices_dir": "./data/voices"
+  },
+  "ai": {
+    "primary_model": "google/gemma-4-31b-it:free",
+    "backup_models": [
+      "openai/gpt-oss-120b:free",
+      "google/gemma-4-26b-a4b-it:free",
+      "liquid/lfm-2.5-1.2b-thinking:free",
+      "poolside/laguna-xs.2:free"
+    ],
+    "system_prompt": "You are Vo, a helpful voice assistant. Be concise and friendly.",
+    "max_tokens": 1024,
+    "temperature": 0.7,
+    "timeout": 30
+  },
+  "session": {
+    "memory_messages": 5,
+    "ttl_hours": 24,
+    "storage": "sqlite"
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "./data/vovoice.db"
+  },
+  "email": {
+    "enabled": false,
+    "smtp_host": "smtp.example.com",
+    "smtp_port": 587,
+    "smtp_user": "",
+    "smtp_password": "",
+    "from_address": "noreply@vovoice.example.com"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "./data/logs/vovoice.log",
+    "max_size_mb": 10,
+    "backup_count": 5
+  },
+  "openrouter_token": ""
+}
