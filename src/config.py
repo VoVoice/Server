@@ -114,6 +114,7 @@ def load_config(path: str = "config.json") -> AppConfig:
         "SMTP_PORT": ("email.smtp_port", int),
         "SMTP_USER": ("email.smtp_user", str),
         "SMTP_PASSWORD": ("email.smtp_password", str),
+        "SMTP_FROM": ("email.from_address", str),
     }
 
     for env_key, (config_path_str, config_type) in env_overrides.items():
